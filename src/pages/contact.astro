@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
-import { SITE, ZONES } from '../config';
+import { SITE, ZONES, link } from '../config';
 ---
 <Base
   title="Contact : ménage Airbnb et nettoyage en 77, 91 et 93"
@@ -9,7 +9,7 @@ import { SITE, ZONES } from '../config';
 >
   <section class="page-hero">
     <div class="container" data-reveal>
-      <p class="breadcrumb"><a href="/">Accueil</a> / Contact</p>
+      <p class="breadcrumb"><a href={link('/')}>Accueil</a> / Contact</p>
       <p class="eyebrow">Contact</p>
       <h1>Une question ? Nous vous répondons vite</h1>
       <p class="lead">Par téléphone, e-mail, WhatsApp ou via le formulaire ci-dessous : choisissez ce qui vous arrange.</p>
@@ -33,11 +33,11 @@ import { SITE, ZONES } from '../config';
 
         <div class="notice notice-accent" style="margin-top:28px">
           <Icon name="list" />
-          <p>Pour un devis précis (lien de l'annonce, photos, fréquence), utilisez plutôt notre <a href="/devis/"><strong>formulaire de demande de devis</strong></a>.</p>
+          <p>Pour un devis précis (lien de l'annonce, photos, fréquence), utilisez plutôt notre <a href={link('/devis/')}><strong>formulaire de demande de devis</strong></a>.</p>
         </div>
       </div>
 
-      <form class="form-card" action={SITE.formEndpoint} method="POST" data-ajax-form data-reveal data-reveal-delay="1">
+      <form class="form-card" action={SITE.formEndpoint} method="POST" data-ajax-form data-fallback={link('/contact/')} data-reveal data-reveal-delay="1">
         <h2 style="font-size:1.25rem">Message rapide</h2>
         <input type="hidden" name="_subject" value={`Nouveau message – ${SITE.nom}`} />
         <input type="hidden" name="formulaire" value="Contact" />
@@ -66,7 +66,7 @@ import { SITE, ZONES } from '../config';
           <div class="field full consent-wrap">
             <label class="consent">
               <input type="checkbox" name="consentement_rgpd" value="oui" required />
-              <span>J'accepte que mes informations soient utilisées pour me recontacter. Voir la <a href="/politique-confidentialite/">politique de confidentialité</a>. *</span>
+              <span>J'accepte que mes informations soient utilisées pour me recontacter. Voir la <a href={link('/politique-confidentialite/')}>politique de confidentialité</a>. *</span>
             </label>
             <span class="error-msg" aria-live="polite"></span>
           </div>

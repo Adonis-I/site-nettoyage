@@ -1,11 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
-import { SITE } from '../config';
+import { SITE, link } from '../config';
 ---
 <Base title="Mentions légales" description={`Mentions légales du site ${SITE.nom}.`} noindex>
   <section class="page-hero">
     <div class="container">
-      <p class="breadcrumb"><a href="/">Accueil</a> / Mentions légales</p>
+      <p class="breadcrumb"><a href={link('/')}>Accueil</a> / Mentions légales</p>
       <h1>Mentions légales</h1>
       <p class="lead">Page à compléter : les éléments <span class="placeholder">surlignés</span> sont à remplacer par les informations officielles de l'entreprise.</p>
     </div>

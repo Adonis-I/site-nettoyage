@@ -1,4 +1,5 @@
 ---
+import { link } from '../config';
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import CtaBand from '../components/CtaBand.astro';
@@ -10,7 +11,7 @@ import { SERVICES } from '../data/services';
 >
   <section class="page-hero">
     <div class="container" data-reveal>
-      <p class="breadcrumb"><a href="/">Accueil</a> / Prestations</p>
+      <p class="breadcrumb"><a href={link('/')}>Accueil</a> / Prestations</p>
       <p class="eyebrow">Nos prestations</p>
       <h1>Des prestations pensées pour les locations courte durée</h1>
       <p class="lead">Ménage de rotation, linge, remise en ordre : nous préparons chaque logement comme si nous allions y séjourner. Nous intervenons aussi dans les bureaux et locaux professionnels.</p>
@@ -40,14 +41,14 @@ import { SERVICES } from '../data/services';
   <section class="section section-alt">
     <div class="container grid grid-2">
       <article class="card card-media" data-reveal>
-        <img src="/images/chambre-hotel.jpg" alt="Chambre de location courte durée avec lit fait et linge propre" width="1400" height="933" loading="lazy" />
+        <img src={link('/images/chambre-hotel.jpg')} alt="Chambre de location courte durée avec lit fait et linge propre" width="1400" height="933" loading="lazy" />
         <div class="card-body">
           <h3>Locations courte durée & conciergeries</h3>
           <p class="muted">Ménage entre deux séjours, changement des draps, réassort selon vos consignes et remise en ordre : votre logement est prêt pour le check-in.</p>
         </div>
       </article>
       <article class="card card-media" data-reveal data-reveal-delay="1">
-        <img src="/images/bureau-professionnel.jpg" alt="Open space de bureaux propre et dégagé" width="1400" height="933" loading="lazy" />
+        <img src={link('/images/bureau-professionnel.jpg')} alt="Open space de bureaux propre et dégagé" width="1400" height="933" loading="lazy" />
         <div class="card-body">
           <h3>Bureaux & locaux professionnels</h3>
           <p class="muted">Entretien ponctuel ou régulier de vos espaces de travail : bureaux, sanitaires, cuisine, sols et vitres, à des horaires adaptés à votre activité.</p>

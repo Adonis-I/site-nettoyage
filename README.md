@@ -59,11 +59,23 @@ Activez ensuite les notifications par e-mail dans Netlify → *Site configuratio
 
 ## Déployer
 
+### GitHub Pages (gratuit) — configuration actuelle
+
+Le site est publié automatiquement par GitHub Actions (`.github/workflows/deploy.yml`) à chaque `git push` sur `main`.
+
+1. Le dépôt doit être **public** (GitHub Pages gratuit ne fonctionne pas avec un dépôt privé).
+2. Sur GitHub : *Settings → Pages → Build and deployment → Source* : choisissez **GitHub Actions**.
+3. `git push` : après 1 à 2 minutes, le site est en ligne sur **https://adonis-i.github.io/site-nettoyage/** (onglet *Actions* pour suivre la publication).
+
+Le site étant servi dans un sous-dossier, `src/config.ts` contient `base: '/site-nettoyage'`. Dans le code, les liens internes passent par `link('/page/')`. Si vous passez à un nom de domaine personnel ou à Netlify/Vercel, mettez `base: ''` et changez `url`.
+
+### Autres hébergeurs
+
 **Netlify** : poussez le dossier sur GitHub/GitLab puis « Add new site → Import an existing project ». Les réglages sont lus depuis `netlify.toml` (commande `npm run build`, dossier `dist`). Vous pouvez aussi glisser-déposer le dossier `dist` sur app.netlify.com/drop.
 
 **Vercel** : « Add New → Project », importez le dépôt. Astro est détecté automatiquement (build `npm run build`, sortie `dist`).
 
-Ajoutez ensuite votre nom de domaine dans les réglages de l'hébergeur et mettez à jour `url` dans `src/config.ts`.
+Pour ces hébergeurs, mettez `base: ''` dans `src/config.ts`. Ajoutez ensuite votre nom de domaine dans les réglages de l'hébergeur et mettez à jour `url`.
 
 ## À compléter avant la mise en ligne
 

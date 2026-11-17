@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
-import { SITE, ZONES } from '../config';
+import { SITE, ZONES, link } from '../config';
 import { SERVICES } from '../data/services';
 ---
 <Base
@@ -10,7 +10,7 @@ import { SERVICES } from '../data/services';
 >
   <section class="page-hero">
     <div class="container" data-reveal>
-      <p class="breadcrumb"><a href="/">Accueil</a> / Demande de devis</p>
+      <p class="breadcrumb"><a href={link('/')}>Accueil</a> / Demande de devis</p>
       <p class="eyebrow">Demande de devis</p>
       <h1>Parlez-nous de votre logement</h1>
       <p class="lead">Quelques informations suffisent. Plus vous êtes précis (lien de l'annonce, photos), plus notre proposition sera juste.</p>
@@ -25,6 +25,7 @@ import { SERVICES } from '../data/services';
         method="POST"
         enctype="multipart/form-data"
         data-ajax-form
+        data-fallback={link('/contact/')}
         aria-describedby="form-intro"
       >
         <p id="form-intro" class="muted" style="font-size:.9rem">Les champs marqués d'un <span aria-hidden="true">*</span><span class="sr-only">astérisque</span> sont obligatoires.</p>
@@ -123,7 +124,7 @@ import { SERVICES } from '../data/services';
           <div class="field full consent-wrap">
             <label class="consent">
               <input type="checkbox" name="consentement_rgpd" value="oui" required />
-              <span>J'accepte que les informations saisies soient utilisées pour traiter ma demande de devis et me recontacter. Voir notre <a href="/politique-confidentialite/">politique de confidentialité</a>. *</span>
+              <span>J'accepte que les informations saisies soient utilisées pour traiter ma demande de devis et me recontacter. Voir notre <a href={link('/politique-confidentialite/')}>politique de confidentialité</a>. *</span>
             </label>
             <span class="error-msg" aria-live="polite"></span>
           </div>

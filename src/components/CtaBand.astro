@@ -1,5 +1,5 @@
 ---
-import { SITE } from '../config';
+import { SITE, link } from '../config';
 import Icon from './Icon.astro';
 interface Props { titre?: string; texte?: string }
 const {
@@ -15,7 +15,7 @@ const {
         <p>{texte}</p>
       </div>
       <div class="btn-row">
-        <a href="/devis/" class="btn btn-light">Demander un devis <Icon name="arrow" size={18} /></a>
+        <a href={link('/devis/')} class="btn btn-light">Demander un devis <Icon name="arrow" size={18} /></a>
         <a href={`tel:${SITE.telephoneLien}`} class="btn btn-ghost-light"><Icon name="phone" size={18} /> {SITE.telephone}</a>
       </div>
     </div>

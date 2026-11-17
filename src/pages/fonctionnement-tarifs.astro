@@ -1,4 +1,5 @@
 ---
+import { link } from '../config';
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import CtaBand from '../components/CtaBand.astro';
@@ -9,7 +10,7 @@ import CtaBand from '../components/CtaBand.astro';
 >
   <section class="page-hero">
     <div class="container" data-reveal>
-      <p class="breadcrumb"><a href="/">Accueil</a> / Fonctionnement & tarifs</p>
+      <p class="breadcrumb"><a href={link('/')}>Accueil</a> / Fonctionnement & tarifs</p>
       <p class="eyebrow">Fonctionnement & tarifs</p>
       <h1>Un tarif juste, établi pour votre logement</h1>
       <p class="lead">Nous ne publions pas de grille de prix : chaque logement est différent. Tous nos tarifs sont établis sur devis, et aucun prix n'est définitif sans avoir étudié le bien.</p>
@@ -71,7 +72,7 @@ import CtaBand from '../components/CtaBand.astro';
           </ul>
         </div>
         <div class="btn-row" style="justify-content:flex-start">
-          <a href="/devis/?frequence=test" class="btn btn-primary">Demander une prestation test <Icon name="arrow" size={18} /></a>
+          <a href={link('/devis/?frequence=test')} class="btn btn-primary">Demander une prestation test <Icon name="arrow" size={18} /></a>
         </div>
       </div>
 

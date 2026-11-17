@@ -1,7 +1,7 @@
 ---
 import '@fontsource-variable/plus-jakarta-sans';
 import '../styles/global.css';
-import { SITE, NAV, ZONES } from '../config';
+import { SITE, NAV, ZONES, link } from '../config';
 import Icon from '../components/Icon.astro';
 
 interface Props {
@@ -14,9 +14,9 @@ interface Props {
 const { title, description = SITE.description, image = '/images/og-image.jpg', noindex = false } = Astro.props;
 const fullTitle = title.includes(SITE.nom) ? title : `${title} | ${SITE.nom}`;
 const canonical = new URL(Astro.url.pathname, SITE.url).href;
-const ogImage = new URL(image, SITE.url).href;
+const ogImage = new URL(link(image), SITE.url).href;
 const current = Astro.url.pathname;
-const isActive = (href: string) => (href === '/' ? current === '/' : current.startsWith(href));
+const isActive = (href: string) => (href === '/' ? current === link('/') : current.startsWith(link(href)));
 const year = new Date().getFullYear();
 
 const jsonLd = {
@@ -24,7 +24,7 @@ const jsonLd = {
   '@type': 'LocalBusiness',
   name: SITE.nom,
   description: SITE.description,
-  url: SITE.url,
+  url: new URL(link('/'), SITE.url).href,
   telephone: SITE.telephoneLien,
   email: SITE.email,
   image: ogImage,
@@ -41,7 +41,7 @@ const jsonLd = {
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex, follow" />}
     <meta name="theme-color" content="#0b4f5c" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={link('/favicon.svg')} type="image/svg+xml" />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="fr_FR" />
@@ -61,7 +61,7 @@ const jsonLd = {
 
     <header class="site-header" data-header>
       <div class="container header-inner">
-        <a href="/" class="logo" aria-label={`${SITE.nom} – accueil`}>
+        <a href={link('/')} class="logo" aria-label={`${SITE.nom} – accueil`}>
           <span class="logo-mark" aria-hidden="true"><Icon name="sparkles" size={20} /></span>
           <span class="logo-text">{SITE.nom}<small>Ménage & conciergeries</small></span>
         </a>
@@ -69,17 +69,17 @@ const jsonLd = {
         <nav class="main-nav" id="menu" aria-label="Navigation principale">
           <ul>
             {NAV.map((item) => (
-              <li><a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a></li>
+              <li><a href={link(item.href)} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a></li>
             ))}
           </ul>
-          <a href="/devis/" class="btn btn-primary nav-cta-mobile">Demander un devis</a>
+          <a href={link('/devis/')} class="btn btn-primary nav-cta-mobile">Demander un devis</a>
         </nav>
 
         <div class="header-actions">
           <a href={`tel:${SITE.telephoneLien}`} class="header-phone">
             <Icon name="phone" size={18} /><span>{SITE.telephone}</span>
           </a>
-          <a href="/devis/" class="btn btn-primary btn-sm header-cta"><span class="cta-full">Demander un devis</span><span class="cta-short" aria-hidden="true">Devis</span></a>
+          <a href={link('/devis/')} class="btn btn-primary btn-sm header-cta"><span class="cta-full">Demander un devis</span><span class="cta-short" aria-hidden="true">Devis</span></a>
           <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>
             <span class="sr-only">Ouvrir le menu</span>
             <Icon name="menu" class="i-open" /><Icon name="close" class="i-close" />
@@ -95,7 +95,7 @@ const jsonLd = {
     <footer class="site-footer">
       <div class="container footer-grid">
         <div>
-          <a href="/" class="logo logo-light">
+          <a href={link('/')} class="logo logo-light">
             <span class="logo-mark" aria-hidden="true"><Icon name="sparkles" size={20} /></span>
             <span class="logo-text">{SITE.nom}<small>Ménage & conciergeries</small></span>
           </a>
@@ -106,26 +106,26 @@ const jsonLd = {
           <ul class="footer-list">
             <li><a href={`tel:${SITE.telephoneLien}`}><Icon name="phone" size={16} /> {SITE.telephone}</a></li>
             <li><a href={`mailto:${SITE.email}`}><Icon name="mail" size={16} /> {SITE.email}</a></li>
-            <li><a href="/devis/"><Icon name="arrow" size={16} /> Demander un devis</a></li>
+            <li><a href={link('/devis/')}><Icon name="arrow" size={16} /> Demander un devis</a></li>
           </ul>
         </div>
         <div>
           <h2 class="footer-title">Zones d'intervention</h2>
           <ul class="footer-list">
-            {ZONES.map((z) => <li><a href="/zones-intervention/">{z.titre} ({z.departement.match(/\d+/)?.[0]})</a></li>)}
+            {ZONES.map((z) => <li><a href={link('/zones-intervention/')}>{z.titre} ({z.departement.match(/\d+/)?.[0]})</a></li>)}
             <li>Communes voisines sur demande</li>
           </ul>
         </div>
         <div>
           <h2 class="footer-title">Navigation</h2>
           <ul class="footer-list">
-            {NAV.slice(1).map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+            {NAV.slice(1).map((item) => <li><a href={link(item.href)}>{item.label}</a></li>)}
           </ul>
         </div>
       </div>
       <div class="container footer-bottom">
         <p>© {year} {SITE.nom}. Tous droits réservés.</p>
-        <p><a href="/mentions-legales/">Mentions légales</a> · <a href="/politique-confidentialite/">Politique de confidentialité</a></p>
+        <p><a href={link('/mentions-legales/')}>Mentions légales</a> · <a href={link('/politique-confidentialite/')}>Politique de confidentialité</a></p>
       </div>
     </footer>
 

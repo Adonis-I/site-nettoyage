@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { SITE } from '../config';
+import { SITE, link } from '../config';
 import { SERVICES } from '../data/services';
 
 const apercu = SERVICES.slice(0, 6);
@@ -21,7 +21,7 @@ const apercu = SERVICES.slice(0, 6);
           entre chaque séjour pour que vous puissiez vous concentrer sur vos voyageurs et vos propriétaires.
         </p>
         <div class="btn-row">
-          <a href="/devis/" class="btn btn-primary">Demander un devis <Icon name="arrow" size={18} /></a>
+          <a href={link('/devis/')} class="btn btn-primary">Demander un devis <Icon name="arrow" size={18} /></a>
           <a href={`tel:${SITE.telephoneLien}`} class="btn btn-outline"><Icon name="phone" size={18} /> Nous appeler</a>
         </div>
         <ul class="hero-points">
@@ -32,7 +32,7 @@ const apercu = SERVICES.slice(0, 6);
       </div>
       <div class="hero-media" data-reveal data-reveal-delay="1">
         <img
-          src="/images/chambre-draps-propres.jpg"
+          src={link('/images/chambre-draps-propres.jpg')}
           alt="Chambre lumineuse avec un lit fait et des draps propres, prête à accueillir des voyageurs"
           width="1400" height="933" fetchpriority="high"
         />
@@ -47,7 +47,7 @@ const apercu = SERVICES.slice(0, 6);
   <section class="section" aria-labelledby="intro-titre">
     <div class="container split">
       <div class="split-media" data-reveal>
-        <img src="/images/salon-appartement.jpg" alt="Séjour d'appartement propre et rangé, prêt pour une location courte durée" width="1400" height="933" loading="lazy" />
+        <img src={link('/images/salon-appartement.jpg')} alt="Séjour d'appartement propre et rangé, prêt pour une location courte durée" width="1400" height="933" loading="lazy" />
       </div>
       <div data-reveal data-reveal-delay="1">
         <p class="eyebrow">Qui sommes-nous</p>
@@ -93,7 +93,7 @@ const apercu = SERVICES.slice(0, 6);
           </article>
         ))}
       </div>
-      <p style="margin-top:28px"><a href="/prestations/" class="link-arrow">Voir toutes les prestations <Icon name="arrow" size={18} /></a></p>
+      <p style="margin-top:28px"><a href={link('/prestations/')} class="link-arrow">Voir toutes les prestations <Icon name="arrow" size={18} /></a></p>
     </div>
   </section>
 
@@ -109,14 +109,14 @@ const apercu = SERVICES.slice(0, 6);
         <li class="step is-highlight" data-reveal data-reveal-delay="2"><h3>Prestation test</h3><p>Un premier ménage payant pour découvrir notre travail et caler le temps nécessaire.</p></li>
         <li class="step" data-reveal data-reveal-delay="3"><h3>On s'occupe du reste</h3><p>Des ménages ponctuels ou réguliers, calés sur vos réservations.</p></li>
       </ol>
-      <p style="margin-top:28px;text-align:center"><a href="/fonctionnement-tarifs/" class="link-arrow">En savoir plus sur notre fonctionnement <Icon name="arrow" size={18} /></a></p>
+      <p style="margin-top:28px;text-align:center"><a href={link('/fonctionnement-tarifs/')} class="link-arrow">En savoir plus sur notre fonctionnement <Icon name="arrow" size={18} /></a></p>
     </div>
   </section>
 
   <section class="section" aria-labelledby="zones-titre">
     <div class="container split reverse">
       <div class="split-media" data-reveal>
-        <img src="/images/salle-de-bain.jpg" alt="Salle de bain moderne et impeccable avec douche à l'italienne" width="1400" height="933" loading="lazy" />
+        <img src={link('/images/salle-de-bain.jpg')} alt="Salle de bain moderne et impeccable avec douche à l'italienne" width="1400" height="933" loading="lazy" />
       </div>
       <div data-reveal data-reveal-delay="1">
         <p class="eyebrow">Zones d'intervention</p>
@@ -127,7 +127,7 @@ const apercu = SERVICES.slice(0, 6);
           <li><Icon name="pin" size={20} /> Stains & environs (93)</li>
         </ul>
         <p class="muted">Vous gérez des logements dans une commune voisine ? Contactez-nous, nous étudions chaque demande.</p>
-        <a href="/zones-intervention/" class="link-arrow">Voir la carte des zones <Icon name="arrow" size={18} /></a>
+        <a href={link('/zones-intervention/')} class="link-arrow">Voir la carte des zones <Icon name="arrow" size={18} /></a>
       </div>
     </div>
   </section>

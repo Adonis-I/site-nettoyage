@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { ZONES } from '../config';
+import { ZONES, link } from '../config';
 ---
 <Base
   title="Zones d'intervention : Noisiel, Marne-la-Vallée, Corbeil-Essonnes, Stains"
@@ -12,7 +12,7 @@ import { ZONES } from '../config';
 
   <section class="page-hero">
     <div class="container" data-reveal>
-      <p class="breadcrumb"><a href="/">Accueil</a> / Zones d'intervention</p>
+      <p class="breadcrumb"><a href={link('/')}>Accueil</a> / Zones d'intervention</p>
       <p class="eyebrow">Zones d'intervention</p>
       <h1>Nous intervenons dans le 77, le 91 et le 93</h1>
       <p class="lead">Trois secteurs principaux en Île-de-France, et les communes voisines sur simple demande.</p>

@@ -1,11 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
-import { SITE } from '../config';
+import { SITE, link } from '../config';
 ---
 <Base title="Politique de confidentialité" description={`Politique de confidentialité et protection des données personnelles – ${SITE.nom}.`} noindex>
   <section class="page-hero">
     <div class="container">
-      <p class="breadcrumb"><a href="/">Accueil</a> / Politique de confidentialité</p>
+      <p class="breadcrumb"><a href={link('/')}>Accueil</a> / Politique de confidentialité</p>
       <h1>Politique de confidentialité</h1>
       <p class="lead">Page à compléter et à faire valider : les éléments <span class="placeholder">surlignés</span> sont à adapter à la situation réelle de l'entreprise.</p>
     </div>

@@ -9,8 +9,17 @@ export const SITE = {
   /** Nom de l'entreprise (à remplacer quand il sera choisi). */
   nom: '[NOM]',
 
-  /** URL publique du site, utilisée pour le SEO (Open Graph, canonical, sitemap). */
-  url: 'https://www.exemple.fr',
+  /**
+   * Adresse publique du site (domaine seul, sans chemin), utilisée pour le SEO.
+   * GitHub Pages : 'https://adonis-i.github.io' — avec un nom de domaine : 'https://www.mondomaine.fr'
+   */
+  url: 'https://adonis-i.github.io',
+
+  /**
+   * Sous-dossier du site. GitHub Pages sert le site sous /site-nettoyage/.
+   * Avec votre propre nom de domaine (ou Netlify/Vercel), mettez '' (chaîne vide).
+   */
+  base: '/site-nettoyage',
 
   /** Téléphone affiché et version internationale pour les liens tel: / WhatsApp. */
   telephone: '06 98 68 19 97',
@@ -66,3 +75,6 @@ export const NAV = [
   { href: '/zones-intervention/', label: "Zones d'intervention" },
   { href: '/contact/', label: 'Contact' },
 ];
+
+/** Préfixe un lien interne avec le sous-dossier du site : link('/devis/') → '/site-nettoyage/devis/'. */
+export const link = (path: string) => `${SITE.base}${path}`;
