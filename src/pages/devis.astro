@@ -1,0 +1,154 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { SITE, ZONES } from '../config';
+import { SERVICES } from '../data/services';
+---
+<Base
+  title="Demande de devis ménage Airbnb et nettoyage"
+  description="Demandez votre devis gratuit pour le ménage de vos locations courte durée, conciergeries ou bureaux en Seine-et-Marne, Essonne et Seine-Saint-Denis."
+>
+  <section class="page-hero">
+    <div class="container" data-reveal>
+      <p class="breadcrumb"><a href="/">Accueil</a> / Demande de devis</p>
+      <p class="eyebrow">Demande de devis</p>
+      <h1>Parlez-nous de votre logement</h1>
+      <p class="lead">Quelques informations suffisent. Plus vous êtes précis (lien de l'annonce, photos), plus notre proposition sera juste.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:16px">
+    <div class="container">
+      <form
+        class="form-card"
+        action={SITE.formEndpoint}
+        method="POST"
+        enctype="multipart/form-data"
+        data-ajax-form
+        aria-describedby="form-intro"
+      >
+        <p id="form-intro" class="muted" style="font-size:.9rem">Les champs marqués d'un <span aria-hidden="true">*</span><span class="sr-only">astérisque</span> sont obligatoires.</p>
+        <input type="hidden" name="_subject" value={`Nouvelle demande de devis – ${SITE.nom}`} />
+        <input type="hidden" name="formulaire" value="Demande de devis" />
+        <div class="hp-field" aria-hidden="true"><label>Ne pas remplir <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label></div>
+
+        <div class="form-grid">
+          <p class="form-legend full">Vos coordonnées</p>
+          <div class="field">
+            <label for="nom">Nom et prénom *</label>
+            <input id="nom" name="nom" type="text" autocomplete="name" required />
+            <span class="error-msg" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label for="societe">Société / conciergerie <span class="opt">(facultatif)</span></label>
+            <input id="societe" name="societe" type="text" autocomplete="organization" />
+            <span class="error-msg" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label for="telephone">Téléphone *</label>
+            <input id="telephone" name="telephone" type="tel" autocomplete="tel" inputmode="tel" required pattern="^[+0-9 ().\-]{10,20}$" />
+            <span class="error-msg" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label for="email">E-mail *</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+            <span class="error-msg" aria-live="polite"></span>
+          </div>
+
+          <p class="form-legend full">Votre besoin</p>
+          <div class="field">
+            <label for="zone">Ville / zone *</label>
+            <select id="zone" name="zone" required>
+              <option value="">Choisissez une zone</option>
+              {ZONES.map((z) => <option>{z.titre} ({z.departement.match(/\d+/)?.[0]})</option>)}
+              <option>Autre commune (à préciser dans le message)</option>
+            </select>
+            <span class="error-msg" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label for="prestation">Type de prestation *</label>
+            <select id="prestation" name="prestation" required>
+              <option value="">Choisissez une prestation</option>
+              {SERVICES.map((s) => <option>{s.titre}</option>)}
+              <option>Plusieurs prestations / autre</option>
+            </select>
+            <span class="error-msg" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label for="logement">Type de logement *</label>
+            <select id="logement" name="type_logement" required>
+              <option value="">Choisissez un type</option>
+              <option>Studio</option>
+              <option>Appartement</option>
+              <option>Maison</option>
+              <option>Bureaux / local professionnel</option>
+              <option>Autre</option>
+            </select>
+            <span class="error-msg" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label for="surface">Surface ou nombre de pièces *</label>
+            <input id="surface" name="surface_pieces" type="text" placeholder="ex. 45 m², T2, 3 chambres…" required />
+            <span class="error-msg" aria-live="polite"></span>
+          </div>
+
+          <fieldset class="field full">
+            <legend class="label" style="margin-bottom:6px">Fréquence souhaitée *</legend>
+            <div class="choice-row">
+              <label class="choice"><input type="radio" name="frequence" value="Ponctuelle" required /><span>Ponctuelle</span></label>
+              <label class="choice"><input type="radio" name="frequence" value="Régulière" /><span>Régulière</span></label>
+              <label class="choice"><input type="radio" name="frequence" value="Prestation test" id="freq-test" /><span>Prestation test</span></label>
+            </div>
+            <span class="error-msg" aria-live="polite"></span>
+          </fieldset>
+
+          <div class="field full">
+            <label for="annonce">Lien de l'annonce Airbnb <span class="opt">(facultatif)</span></label>
+            <input id="annonce" name="lien_annonce" type="url" inputmode="url" placeholder="https://www.airbnb.fr/rooms/..." />
+            <span class="hint">Le plus simple pour nous permettre d'estimer le travail.</span>
+            <span class="error-msg" aria-live="polite"></span>
+          </div>
+          <div class="field full">
+            <label for="photos">Photos du logement <span class="opt">(facultatif, 6 max., 10 Mo au total)</span></label>
+            <input id="photos" name="photos" type="file" accept="image/*" multiple />
+            <ul class="file-list" data-file-list="photos" aria-live="polite"></ul>
+            <span class="error-msg" aria-live="polite"></span>
+          </div>
+          <div class="field full">
+            <label for="message">Votre message <span class="opt">(facultatif)</span></label>
+            <textarea id="message" name="message" placeholder="Nombre de logements, rythme des rotations, gestion du linge, demande de visite…"></textarea>
+            <span class="error-msg" aria-live="polite"></span>
+          </div>
+
+          <div class="field full consent-wrap">
+            <label class="consent">
+              <input type="checkbox" name="consentement_rgpd" value="oui" required />
+              <span>J'accepte que les informations saisies soient utilisées pour traiter ma demande de devis et me recontacter. Voir notre <a href="/politique-confidentialite/">politique de confidentialité</a>. *</span>
+            </label>
+            <span class="error-msg" aria-live="polite"></span>
+          </div>
+
+          <div class="full">
+            <button type="submit" class="btn btn-primary">Envoyer ma demande <Icon name="arrow" size={18} /></button>
+            <div class="form-status" role="status" tabindex="-1"></div>
+          </div>
+        </div>
+      </form>
+
+      <div class="notice notice-accent" style="margin-top:24px">
+        <Icon name="phone" />
+        <p>Vous préférez en parler de vive voix ? Appelez-nous au <a href={`tel:${SITE.telephoneLien}`}><strong>{SITE.telephone}</strong></a> ou écrivez à <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    import '../scripts/form';
+    // Pré-sélection depuis un lien du type /devis/?frequence=test
+    const p = new URLSearchParams(location.search);
+    if (p.get('frequence') === 'test') {
+      const r = document.getElementById('freq-test') as HTMLInputElement | null;
+      if (r) r.checked = true;
+    }
+  </script>
+</Base>

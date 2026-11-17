@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+<Base
+  title="Fonctionnement et tarifs : devis sur mesure et prestation test"
+  description="Tarifs de ménage Airbnb sur devis : envoyez le lien de votre annonce, des photos ou demandez une visite. Démarrez avec une prestation test pour évaluer notre travail."
+>
+  <section class="page-hero">
+    <div class="container" data-reveal>
+      <p class="breadcrumb"><a href="/">Accueil</a> / Fonctionnement & tarifs</p>
+      <p class="eyebrow">Fonctionnement & tarifs</p>
+      <h1>Un tarif juste, établi pour votre logement</h1>
+      <p class="lead">Nous ne publions pas de grille de prix : chaque logement est différent. Tous nos tarifs sont établis sur devis, et aucun prix n'est définitif sans avoir étudié le bien.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:24px" aria-labelledby="devis-titre">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <h2 id="devis-titre">3 façons d'obtenir votre devis</h2>
+        <p>Choisissez la plus simple pour vous.</p>
+      </div>
+      <div class="grid grid-3">
+        <article class="card" data-reveal>
+          <span class="card-icon"><Icon name="link" size={26} /></span>
+          <h3>Le lien de l'annonce</h3>
+          <p>Envoyez-nous le lien Airbnb (ou autre plateforme) : photos, surface et nombre de couchages nous donnent une première estimation.</p>
+        </article>
+        <article class="card" data-reveal data-reveal-delay="1">
+          <span class="card-icon"><Icon name="camera" size={26} /></span>
+          <h3>Des photos</h3>
+          <p>Quelques photos des pièces, de la cuisine et de la salle de bain suffisent pour évaluer le travail.</p>
+        </article>
+        <article class="card" data-reveal data-reveal-delay="2">
+          <span class="card-icon"><Icon name="pin" size={26} /></span>
+          <h3>Une visite sur place</h3>
+          <p>Pour un logement atypique ou des locaux professionnels, nous pouvons venir voir le bien avec vous.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" aria-labelledby="etapes-titre">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Étape par étape</p>
+        <h2 id="etapes-titre">Comment se déroule notre collaboration</h2>
+      </div>
+      <ol class="timeline" data-reveal>
+        <li><h3>Prise de contact</h3><p>Vous nous présentez votre logement via le formulaire, par téléphone ou par WhatsApp : lien de l'annonce, photos ou demande de visite.</p></li>
+        <li><h3>Étude et devis</h3><p>Nous étudions le bien et vos attentes (fréquence, linge, consignes particulières) et vous envoyons une proposition sur mesure.</p></li>
+        <li class="is-highlight"><h3>Prestation test</h3><p>Un premier ménage, payant, pour découvrir la qualité de notre travail et estimer précisément le temps nécessaire aux prochaines interventions.</p></li>
+        <li><h3>Mise en place</h3><p>Nous ajustons le tarif si besoin et organisons les ménages suivants, ponctuels ou réguliers, selon vos réservations.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="highlight-box" data-reveal>
+        <div>
+          <span class="card-tag">Recommandé pour commencer</span>
+          <h2>La prestation test</h2>
+          <p>Vous voulez voir avant de vous engager ? C'est normal. La prestation test est un premier ménage réel, facturé, dans l'un de vos logements.</p>
+          <ul class="check-list">
+            <li><Icon name="check" size={20} /> Vous jugez la qualité sur pièce</li>
+            <li><Icon name="check" size={20} /> Nous mesurons le temps réellement nécessaire</li>
+            <li><Icon name="check" size={20} /> Le tarif des prochains ménages est calé au plus juste</li>
+          </ul>
+        </div>
+        <div class="btn-row" style="justify-content:flex-start">
+          <a href="/devis/?frequence=test" class="btn btn-primary">Demander une prestation test <Icon name="arrow" size={18} /></a>
+        </div>
+      </div>
+
+      <div class="notice" style="margin-top:28px" data-reveal>
+        <Icon name="sparkles" />
+        <p>Les produits d'entretien sont fournis par nos soins. Le matériel (aspirateur, balais…) est généralement disponible sur place, à confirmer ensemble.</p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

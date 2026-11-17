@@ -1,0 +1,60 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SERVICES } from '../data/services';
+---
+<Base
+  title="Prestations de ménage Airbnb et nettoyage de bureaux"
+  description="Nettoyage complet entre deux séjours Airbnb, sanitaires, sols, vitres, changement des draps, linge et nettoyage de bureaux. Intervention en 77, 91 et 93."
+>
+  <section class="page-hero">
+    <div class="container" data-reveal>
+      <p class="breadcrumb"><a href="/">Accueil</a> / Prestations</p>
+      <p class="eyebrow">Nos prestations</p>
+      <h1>Des prestations pensées pour les locations courte durée</h1>
+      <p class="lead">Ménage de rotation, linge, remise en ordre : nous préparons chaque logement comme si nous allions y séjourner. Nous intervenons aussi dans les bureaux et locaux professionnels.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:24px">
+    <div class="container">
+      <div class="grid grid-3">
+        {SERVICES.map((s, i) => (
+          <article class={`card ${s.phare ? 'card-featured' : ''}`} data-reveal data-reveal-delay={String(i % 3)}>
+            <span class="card-icon"><Icon name={s.icon} size={26} /></span>
+            {s.phare && <span class="card-tag">Notre spécialité</span>}
+            <h3>{s.titre}</h3>
+            <p>{s.texte}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="notice" style="margin-top:32px" data-reveal>
+        <Icon name="sparkles" />
+        <p><strong>Produits et matériel :</strong> les produits d'entretien sont fournis par nos soins. Le matériel (aspirateur, balais…) est généralement disponible sur place : nous le confirmons ensemble avant la première intervention.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container grid grid-2">
+      <article class="card card-media" data-reveal>
+        <img src="/images/chambre-hotel.jpg" alt="Chambre de location courte durée avec lit fait et linge propre" width="1400" height="933" loading="lazy" />
+        <div class="card-body">
+          <h3>Locations courte durée & conciergeries</h3>
+          <p class="muted">Ménage entre deux séjours, changement des draps, réassort selon vos consignes et remise en ordre : votre logement est prêt pour le check-in.</p>
+        </div>
+      </article>
+      <article class="card card-media" data-reveal data-reveal-delay="1">
+        <img src="/images/bureau-professionnel.jpg" alt="Open space de bureaux propre et dégagé" width="1400" height="933" loading="lazy" />
+        <div class="card-body">
+          <h3>Bureaux & locaux professionnels</h3>
+          <p class="muted">Entretien ponctuel ou régulier de vos espaces de travail : bureaux, sanitaires, cuisine, sols et vitres, à des horaires adaptés à votre activité.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <CtaBand titre="Un besoin précis ?" texte="Chaque logement est différent. Décrivez-nous le vôtre, nous construisons la prestation avec vous." />
+</Base>

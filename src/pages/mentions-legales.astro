@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../config';
+---
+<Base title="Mentions légales" description={`Mentions légales du site ${SITE.nom}.`} noindex>
+  <section class="page-hero">
+    <div class="container">
+      <p class="breadcrumb"><a href="/">Accueil</a> / Mentions légales</p>
+      <h1>Mentions légales</h1>
+      <p class="lead">Page à compléter : les éléments <span class="placeholder">surlignés</span> sont à remplacer par les informations officielles de l'entreprise.</p>
+    </div>
+  </section>
+  <section class="section" style="padding-top:16px">
+    <div class="container prose">
+      <h2>Éditeur du site</h2>
+      <p>
+        {SITE.nom} – <span class="placeholder">forme juridique (ex. SAS, EI…)</span> au capital de <span class="placeholder">… €</span><br />
+        Siège social : <span class="placeholder">adresse complète</span><br />
+        SIRET : <span class="placeholder">numéro SIRET</span> – RCS <span class="placeholder">ville</span><br />
+        N° TVA intracommunautaire : <span class="placeholder">numéro de TVA</span><br />
+        Téléphone : {SITE.telephone} – E-mail : <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+      </p>
+      <h2>Directeur de la publication</h2>
+      <p><span class="placeholder">Nom et prénom du responsable</span></p>
+      <h2>Hébergement</h2>
+      <p><span class="placeholder">Nom de l'hébergeur (ex. Netlify, Inc. – 512 2nd Street, Suite 200, San Francisco, CA 94107, États-Unis / ou Vercel Inc.)</span></p>
+      <h2>Propriété intellectuelle</h2>
+      <p>L'ensemble des contenus de ce site (textes, logo, mise en page) est la propriété de {SITE.nom}, sauf mention contraire. Les photographies proviennent de banques d'images libres de droits (Unsplash). Toute reproduction sans autorisation est interdite.</p>
+      <h2>Responsabilité</h2>
+      <p>{SITE.nom} s'efforce de fournir des informations exactes et à jour, sans pouvoir garantir l'absence d'erreurs. Les informations présentes sur ce site ne constituent pas une offre contractuelle : toute prestation fait l'objet d'un devis.</p>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,174 @@
+---
+import '@fontsource-variable/plus-jakarta-sans';
+import '../styles/global.css';
+import { SITE, NAV, ZONES } from '../config';
+import Icon from '../components/Icon.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+}
+
+const { title, description = SITE.description, image = '/images/og-image.jpg', noindex = false } = Astro.props;
+const fullTitle = title.includes(SITE.nom) ? title : `${title} | ${SITE.nom}`;
+const canonical = new URL(Astro.url.pathname, SITE.url).href;
+const ogImage = new URL(image, SITE.url).href;
+const current = Astro.url.pathname;
+const isActive = (href: string) => (href === '/' ? current === '/' : current.startsWith(href));
+const year = new Date().getFullYear();
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: SITE.nom,
+  description: SITE.description,
+  url: SITE.url,
+  telephone: SITE.telephoneLien,
+  email: SITE.email,
+  image: ogImage,
+  areaServed: ['Noisiel', 'Marne-la-Vallée', 'Corbeil-Essonnes', 'Stains', 'Seine-et-Marne', 'Essonne', 'Seine-Saint-Denis'],
+};
+---
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <meta name="theme-color" content="#0b4f5c" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content={SITE.nom} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+    <header class="site-header" data-header>
+      <div class="container header-inner">
+        <a href="/" class="logo" aria-label={`${SITE.nom} – accueil`}>
+          <span class="logo-mark" aria-hidden="true"><Icon name="sparkles" size={20} /></span>
+          <span class="logo-text">{SITE.nom}<small>Ménage & conciergeries</small></span>
+        </a>
+
+        <nav class="main-nav" id="menu" aria-label="Navigation principale">
+          <ul>
+            {NAV.map((item) => (
+              <li><a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a></li>
+            ))}
+          </ul>
+          <a href="/devis/" class="btn btn-primary nav-cta-mobile">Demander un devis</a>
+        </nav>
+
+        <div class="header-actions">
+          <a href={`tel:${SITE.telephoneLien}`} class="header-phone">
+            <Icon name="phone" size={18} /><span>{SITE.telephone}</span>
+          </a>
+          <a href="/devis/" class="btn btn-primary btn-sm header-cta"><span class="cta-full">Demander un devis</span><span class="cta-short" aria-hidden="true">Devis</span></a>
+          <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>
+            <span class="sr-only">Ouvrir le menu</span>
+            <Icon name="menu" class="i-open" /><Icon name="close" class="i-close" />
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="contenu">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <a href="/" class="logo logo-light">
+            <span class="logo-mark" aria-hidden="true"><Icon name="sparkles" size={20} /></span>
+            <span class="logo-text">{SITE.nom}<small>Ménage & conciergeries</small></span>
+          </a>
+          <p class="footer-about">Ménage professionnel pour conciergeries, locations courte durée et locaux professionnels en Île-de-France.</p>
+        </div>
+        <div>
+          <h2 class="footer-title">Contact</h2>
+          <ul class="footer-list">
+            <li><a href={`tel:${SITE.telephoneLien}`}><Icon name="phone" size={16} /> {SITE.telephone}</a></li>
+            <li><a href={`mailto:${SITE.email}`}><Icon name="mail" size={16} /> {SITE.email}</a></li>
+            <li><a href="/devis/"><Icon name="arrow" size={16} /> Demander un devis</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">Zones d'intervention</h2>
+          <ul class="footer-list">
+            {ZONES.map((z) => <li><a href="/zones-intervention/">{z.titre} ({z.departement.match(/\d+/)?.[0]})</a></li>)}
+            <li>Communes voisines sur demande</li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-title">Navigation</h2>
+          <ul class="footer-list">
+            {NAV.slice(1).map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+          </ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>© {year} {SITE.nom}. Tous droits réservés.</p>
+        <p><a href="/mentions-legales/">Mentions légales</a> · <a href="/politique-confidentialite/">Politique de confidentialité</a></p>
+      </div>
+    </footer>
+
+    <div class="floating-actions" aria-label="Contact rapide">
+      <a href={`https://wa.me/${SITE.whatsapp}`} class="fab fab-whatsapp" target="_blank" rel="noopener">
+        <Icon name="whatsapp" /><span class="sr-only">Nous écrire sur WhatsApp</span>
+      </a>
+      <a href={`tel:${SITE.telephoneLien}`} class="fab fab-call">
+        <Icon name="phone" /><span>Appeler</span>
+      </a>
+    </div>
+
+    <script>
+      // Menu mobile
+      const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+      const header = document.querySelector<HTMLElement>('[data-header]');
+      toggle?.addEventListener('click', () => {
+        const open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!open));
+        header?.classList.toggle('menu-open', !open);
+        document.body.classList.toggle('no-scroll', !open);
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && header?.classList.contains('menu-open')) toggle?.click();
+      });
+
+      // Ombre de l'en-tête au défilement
+      const onScroll = () => header?.classList.toggle('scrolled', window.scrollY > 8);
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      // Animations d'apparition au défilement
+      const items = document.querySelectorAll('[data-reveal]');
+      if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        items.forEach((el) => io.observe(el));
+      } else {
+        items.forEach((el) => el.classList.add('is-visible'));
+      }
+    </script>
+  </body>
+</html>

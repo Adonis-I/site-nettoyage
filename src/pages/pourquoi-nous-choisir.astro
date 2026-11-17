@@ -1,0 +1,60 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const raisons = [
+  { icon: 'users', titre: 'Expérience terrain', texte: "Nos agents d'entretien ont plus de 6 ans d'expérience en conciergeries, logements et bureaux. Ils connaissent vos exigences et vos contraintes." },
+  { icon: 'zap', titre: 'Efficacité et organisation', texte: 'Des méthodes de travail rodées pour un résultat constant, même quand les rotations s’enchaînent.' },
+  { icon: 'euro', titre: 'Tarifs compétitifs', texte: 'Des prix justes, établis sur devis selon votre logement et vos besoins réels. Pas de forfait gonflé.' },
+  { icon: 'calendar', titre: 'Flexibilité', texte: 'Intervention ponctuelle ou régulière, en fonction de votre calendrier de réservations.' },
+  { icon: 'headset', titre: 'Service client réactif', texte: 'Un interlocuteur disponible, joignable par téléphone, e-mail ou WhatsApp, qui vous répond vite.' },
+  { icon: 'layers', titre: 'Pensé pour les conciergeries', texte: 'Consignes par logement, linge, remise en scène : nous nous adaptons à votre organisation, pas l’inverse.' },
+];
+---
+<Base
+  title="Pourquoi nous choisir ? Une équipe de ménage fiable pour conciergeries"
+  description="Agents expérimentés, organisation efficace, tarifs compétitifs, flexibilité et service client réactif : découvrez pourquoi confier le ménage de vos locations courte durée à notre équipe."
+>
+  <section class="page-hero">
+    <div class="container" data-reveal>
+      <p class="breadcrumb"><a href="/">Accueil</a> / Pourquoi nous choisir ?</p>
+      <p class="eyebrow">Pourquoi nous choisir ?</p>
+      <h1>Gagnez du temps, gardez l'esprit tranquille</h1>
+      <p class="lead">Votre réputation dépend de l'état de vos logements à chaque arrivée. Nous en faisons notre priorité.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:24px">
+    <div class="container grid grid-3">
+      {raisons.map((r, i) => (
+        <article class="card" data-reveal data-reveal-delay={String(i % 3)}>
+          <span class="card-icon"><Icon name={r.icon} size={26} /></span>
+          <h3>{r.titre}</h3>
+          <p>{r.texte}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container split">
+      <div class="split-media" data-reveal>
+        <img src="/images/agent-nettoyage-vitres.jpg" alt="Agente d'entretien nettoyant une fenêtre avec des gants de protection" width="1400" height="933" loading="lazy" />
+      </div>
+      <div data-reveal data-reveal-delay="1">
+        <p class="eyebrow">Notre engagement</p>
+        <h2>Une jeune entreprise, des professionnels aguerris</h2>
+        <p>Nous associons l'énergie d'une jeune équipe à l'expérience d'agents qui connaissent parfaitement le métier. Résultat : un service sérieux, réactif et à l'écoute.</p>
+        <ul class="check-list">
+          <li><Icon name="check" size={20} /> Un logement prêt pour chaque check-in</li>
+          <li><Icon name="check" size={20} /> Des consignes respectées, logement par logement</li>
+          <li><Icon name="check" size={20} /> Une communication simple et directe</li>
+          <li><Icon name="check" size={20} /> Moins de temps passé à gérer le ménage</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

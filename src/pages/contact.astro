@@ -1,0 +1,85 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { SITE, ZONES } from '../config';
+---
+<Base
+  title="Contact : ménage Airbnb et nettoyage en 77, 91 et 93"
+  description={`Contactez ${SITE.nom} par téléphone, e-mail ou WhatsApp pour le ménage de vos locations courte durée et bureaux à Noisiel, Corbeil-Essonnes, Stains et alentours.`}
+>
+  <section class="page-hero">
+    <div class="container" data-reveal>
+      <p class="breadcrumb"><a href="/">Accueil</a> / Contact</p>
+      <p class="eyebrow">Contact</p>
+      <h1>Une question ? Nous vous répondons vite</h1>
+      <p class="lead">Par téléphone, e-mail, WhatsApp ou via le formulaire ci-dessous : choisissez ce qui vous arrange.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:16px">
+    <div class="container grid grid-2" style="align-items:start">
+      <div data-reveal>
+        <ul class="contact-list">
+          <li><a href={`tel:${SITE.telephoneLien}`}><span class="card-icon" style="margin:0"><Icon name="phone" /></span><div><strong>Téléphone</strong><span>{SITE.telephone}</span></div></a></li>
+          <li><a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener"><span class="card-icon" style="margin:0"><Icon name="whatsapp" /></span><div><strong>WhatsApp</strong><span>Écrivez-nous, même en dehors des heures de bureau</span></div></a></li>
+          <li><a href={`mailto:${SITE.email}`}><span class="card-icon" style="margin:0"><Icon name="mail" /></span><div><strong>E-mail</strong><span>{SITE.email}</span></div></a></li>
+        </ul>
+
+        <h2 style="font-size:1.25rem;margin-top:36px">Zones d'intervention</h2>
+        <ul class="check-list">
+          {ZONES.map((z) => <li><Icon name="pin" size={20} /> {z.titre} – {z.departement}</li>)}
+          <li><Icon name="pin" size={20} /> Communes voisines sur demande</li>
+        </ul>
+
+        <div class="notice notice-accent" style="margin-top:28px">
+          <Icon name="list" />
+          <p>Pour un devis précis (lien de l'annonce, photos, fréquence), utilisez plutôt notre <a href="/devis/"><strong>formulaire de demande de devis</strong></a>.</p>
+        </div>
+      </div>
+
+      <form class="form-card" action={SITE.formEndpoint} method="POST" data-ajax-form data-reveal data-reveal-delay="1">
+        <h2 style="font-size:1.25rem">Message rapide</h2>
+        <input type="hidden" name="_subject" value={`Nouveau message – ${SITE.nom}`} />
+        <input type="hidden" name="formulaire" value="Contact" />
+        <div class="hp-field" aria-hidden="true"><label>Ne pas remplir <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label></div>
+        <div class="form-grid">
+          <div class="field full">
+            <label for="c-nom">Nom *</label>
+            <input id="c-nom" name="nom" type="text" autocomplete="name" required />
+            <span class="error-msg" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label for="c-tel">Téléphone *</label>
+            <input id="c-tel" name="telephone" type="tel" autocomplete="tel" required pattern="^[+0-9 ().\-]{10,20}$" />
+            <span class="error-msg" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label for="c-email">E-mail *</label>
+            <input id="c-email" name="email" type="email" autocomplete="email" required />
+            <span class="error-msg" aria-live="polite"></span>
+          </div>
+          <div class="field full">
+            <label for="c-message">Message *</label>
+            <textarea id="c-message" name="message" required></textarea>
+            <span class="error-msg" aria-live="polite"></span>
+          </div>
+          <div class="field full consent-wrap">
+            <label class="consent">
+              <input type="checkbox" name="consentement_rgpd" value="oui" required />
+              <span>J'accepte que mes informations soient utilisées pour me recontacter. Voir la <a href="/politique-confidentialite/">politique de confidentialité</a>. *</span>
+            </label>
+            <span class="error-msg" aria-live="polite"></span>
+          </div>
+          <div class="full">
+            <button type="submit" class="btn btn-primary">Envoyer <Icon name="arrow" size={18} /></button>
+            <div class="form-status" role="status" tabindex="-1"></div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    import '../scripts/form';
+  </script>
+</Base>

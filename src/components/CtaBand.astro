@@ -1,0 +1,23 @@
+---
+import { SITE } from '../config';
+import Icon from './Icon.astro';
+interface Props { titre?: string; texte?: string }
+const {
+  titre = 'Parlons de vos logements',
+  texte = "Envoyez-nous le lien de votre annonce ou quelques photos : nous revenons vers vous rapidement avec une proposition adaptée.",
+} = Astro.props;
+---
+<section class="section">
+  <div class="container">
+    <div class="cta-band" data-reveal>
+      <div>
+        <h2>{titre}</h2>
+        <p>{texte}</p>
+      </div>
+      <div class="btn-row">
+        <a href="/devis/" class="btn btn-light">Demander un devis <Icon name="arrow" size={18} /></a>
+        <a href={`tel:${SITE.telephoneLien}`} class="btn btn-ghost-light"><Icon name="phone" size={18} /> {SITE.telephone}</a>
+      </div>
+    </div>
+  </div>
+</section>
